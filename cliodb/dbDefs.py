@@ -5,8 +5,10 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 db = SQLAlchemy(app)
 
+Base = db.Model
 
-class User(db.Model):
+
+class User(Base):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
@@ -19,7 +21,7 @@ class User(db.Model):
         return '<User %r>' % self.username
 
 # Artist definition
-class Artist(db.Model):
+class Artist(Base):
     __tablename__ = 'artist'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
@@ -31,7 +33,7 @@ class Artist(db.Model):
         return '<Artist %r>' % self.name
 
 # Album definition
-class Album(db.Model):
+class Album(Base):
     __tablename__ = 'album'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
@@ -47,7 +49,7 @@ class Album(db.Model):
         return '<Album %r>' % self.name
 
 # Track definition
-class Track(db.Model):
+class Track(Base):
     __tablename__ = 'track'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
