@@ -57,7 +57,7 @@ class Track(Base):
     album_id = db.Column(db.Integer, db.ForeignKey('album.id'))
     album = db.relationship(Album, backref=db.backref('tracks', uselist=True))
 
-    def __init__(self, name, rating, album):
+    def __init__(self, name, album, rating=0):
         self.name = name
         self.rating = rating
         self.album = album
