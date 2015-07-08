@@ -54,12 +54,14 @@ class Track(Base):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
     rating = db.Column(db.Integer)
+    number = db.Column(db.Integer)
     album_id = db.Column(db.Integer, db.ForeignKey('album.id'))
     album = db.relationship(Album, backref=db.backref('tracks', uselist=True))
 
-    def __init__(self, name, album, rating=0):
+    def __init__(self, name, album, rating=0, number=0):
         self.name = name
         self.rating = rating
+        self.number = number
         self.album = album
 
     def __repr__(self):
